@@ -1,2 +1,2 @@
 # api-2
-lear golang
+learn golang
