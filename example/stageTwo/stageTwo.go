@@ -129,11 +129,19 @@ func main() {
 	budi := Customer{"biji", "bunga", 99}
 	fmt.Println(budi )
 
+	fmt.Println("\nSTRUCT methods")
+	rubik := Customer{"rubik", "jalan", 34}
+	rubik.sayHello()
+
 }
 
 type Customer struct {
 	Name, Address string
 	Age int
+}
+
+func (customer Customer) sayHello() {
+	fmt.Println(" hallo", customer.Name)
 }
 
 func isPanic(error bool) {
