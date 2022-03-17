@@ -110,7 +110,30 @@ func main() {
 	isPanic(true)
 
 
+	fmt.Println("\nSTRUCT. as representasi dari data. mirip class di java")
+	var people Customer
+	people.Address = "jalan gajayana"
+	people.Name = "sam kodir"
+	people.Age = 25
+	fmt.Println("here is customer", people)
 
+	fmt.Println("\nSTRUCT literals #1. direct initialize")
+	jordan := Customer{
+		Name:"jordan",
+		Address:"america",
+		Age: 25,
+	}
+	fmt.Println(jordan)
+
+	fmt.Println("\nSTRUCT literals #2. direct initialize. harus urutl. AllArgsConstructor")
+	budi := Customer{"biji", "bunga", 99}
+	fmt.Println(budi )
+
+}
+
+type Customer struct {
+	Name, Address string
+	Age int
 }
 
 func isPanic(error bool) {
