@@ -136,10 +136,17 @@ func main() {
 	fmt.Println("\nINTERFACE. blue print")
 	gunawan := Customer{"gunawan", "jalan", 34}
 	SayYourIdentity(gunawan)
+
+	yanto := Seller{ Name: "yanto", StoreName: "pakaian bayi"}
+	SayYourIdentity(yanto)
 }
 
 type Customer struct {
 	Name, Address string
+	Age int
+}
+type Seller struct {
+	Name, Address, StoreName string
 	Age int
 }
 
@@ -150,6 +157,7 @@ func (customer Customer) sayHello() {
 type HasDetail interface {
 	GetName() string
 	GetAddress() string
+	GetAuthority() string
 }
 
 func (customer Customer) GetName() string{ // contract for Customer
@@ -160,9 +168,26 @@ func (customer Customer) GetAddress() string{ // contract for Customer
 	return customer.Address
 }
 
+func (seller Seller) GetName() string{ // contract for Seller
+	return seller.Name
+}
+
+func (seller Seller) GetAddress() string{ // contract for Seller
+	return seller.Address
+}
+
+func (seller Seller) GetAuthority() string{
+	return "Seller"
+}
+
+func (customer Customer) GetAuthority() string{
+	return "Customer"
+}
+
 func SayYourIdentity(detail HasDetail) {
 	fmt.Println(" hello my name is", detail.GetName())
 	fmt.Println(" I live in", detail.GetAddress())
+	fmt.Println(" I here as", detail.GetAuthority())
 }
 
 func isPanic(error bool) {
