@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -136,9 +137,26 @@ func main() {
 	fmt.Println("\nINTERFACE. blue print")
 	gunawan := Customer{"gunawan", "jalan", 34}
 	SayYourIdentity(gunawan)
-
 	yanto := Seller{ Name: "yanto", StoreName: "pakaian bayi"}
 	SayYourIdentity(yanto)
+
+	fmt.Println("\nNil untuk pengecekan null, hanya berlaku untuk interface, function, map ,slice, pointer dan channel")
+
+	fmt.Println("\nError")
+	contohError := errors.New(" contoh error")
+	fmt.Println(contohError.Error())
+	int, _ := pembagian(6, 3)
+	fmt.Println("no error, result", int)
+	_, error := pembagian(6, 0)
+	fmt.Println("ada error", error)
+
+}
+
+func pembagian(a, b int) (int, error){
+	if b == 0 {
+		return 0, errors.New("pembagian dengan 0")
+	}
+	return a / b, nil
 }
 
 type Customer struct {
