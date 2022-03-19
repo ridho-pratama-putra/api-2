@@ -154,7 +154,7 @@ func (customer Customer) sayHello() {
 	fmt.Println(" hallo", customer.Name)
 }
 
-type HasDetail interface {
+type HasDetail interface { // can be used for another struct too ass
 	GetName() string
 	GetAddress() string
 	GetAuthority() string
