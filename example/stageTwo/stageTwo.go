@@ -26,7 +26,7 @@ type Blacklist func(string) bool
 
 func registerUser(name string, blacklist Blacklist) {
 	if blacklist(name) == true {
-		fmt.Println(" You're blocked ",name)
+		fmt.Println(" You're blocked ", name)
 	} else {
 		fmt.Println(" welcome ", name)
 	}
@@ -44,7 +44,7 @@ func factorialRecursive(value int) int {
 	if value == 1 {
 		return 1
 	}
-	return value * factorialRecursive(value - 1)
+	return value * factorialRecursive(value-1)
 }
 
 func logging() {
@@ -59,7 +59,7 @@ func runApplication(value int) {
 	defer logging()
 	defer loggingLast()
 	result := 10 / value
-	fmt.Println(" function result",result)
+	fmt.Println(" function result", result)
 	fmt.Println(" run application")
 }
 
@@ -74,13 +74,12 @@ func main() {
 	functWithFuncAsParameter("merenung", funcWithSingleReturnValue)
 	functWithFuncAsParameter("lari-lari", funcWithSingleReturnValue)
 
-
 	fmt.Println("\nFunction anonymous, direct function in param or function without name")
-	blacklist := func (name string) bool {
+	blacklist := func(name string) bool {
 		return name == "amrozi"
 	}
 	registerUser("amrozi", blacklist) // by variable
-	registerUser("anjing", func (name string) bool { // by parameter
+	registerUser("anjing", func(name string) bool { // by parameter
 		return name == "amrozi"
 	})
 
@@ -99,9 +98,8 @@ func main() {
 	}
 
 	increment()
-	fmt.Println(" counter value",counter)
+	fmt.Println(" counter value", counter)
 	fmt.Println(" outside of closure", name)
-
 
 	fmt.Println("\nFunction DEFER. executed (LIFO if multiple) di akhir bahkan jika ada error.")
 	runApplication(10)
@@ -109,7 +107,6 @@ func main() {
 	//runApplication(0) // division by zero will return panic and break following lines
 	fmt.Println("\nFunction RECOVER. better place on defer")
 	isPanic(true)
-
 
 	fmt.Println("\nSTRUCT. as representasi dari data. mirip class di java")
 	var people Customer
@@ -120,15 +117,15 @@ func main() {
 
 	fmt.Println("\nSTRUCT literals #1. direct initialize")
 	jordan := Customer{
-		Name:"jordan",
-		Address:"america",
-		Age: 25,
+		Name:    "jordan",
+		Address: "america",
+		Age:     25,
 	}
 	fmt.Println(jordan)
 
 	fmt.Println("\nSTRUCT literals #2. direct initialize. harus urutl. AllArgsConstructor")
 	budi := Customer{"biji", "bunga", 99}
-	fmt.Println(budi )
+	fmt.Println(budi)
 
 	fmt.Println("\nSTRUCT methods")
 	rubik := Customer{"rubik", "jalan", 34}
@@ -137,7 +134,7 @@ func main() {
 	fmt.Println("\nINTERFACE. blue print")
 	gunawan := Customer{"gunawan", "jalan", 34}
 	SayYourIdentity(gunawan)
-	yanto := Seller{ Name: "yanto", StoreName: "pakaian bayi"}
+	yanto := Seller{Name: "yanto", StoreName: "pakaian bayi"}
 	SayYourIdentity(yanto)
 
 	fmt.Println("\nNil untuk pengecekan null, hanya berlaku untuk interface, function, map ,slice, pointer dan channel")
@@ -146,13 +143,36 @@ func main() {
 	contohError := errors.New(" contoh error")
 	fmt.Println(contohError.Error())
 	int, _ := pembagian(6, 3)
-	fmt.Println("no error, result", int)
+	fmt.Println(" no error, result", int)
 	_, error := pembagian(6, 0)
-	fmt.Println("ada error", error)
+	fmt.Println(" ada error", error)
 
+	fmt.Println("\nType Assertion. replace data type ketika menggunakan interface kosong")
+	resultTypeAssertion := random()
+	stringConverted := resultTypeAssertion.(string)
+	fmt.Println(" string converted", stringConverted)
+
+	fmt.Println("\nType Assertion using switch case")
+	resultUsingSwitch := randomBool()
+	switch value := resultUsingSwitch.(type) {
+	case string:
+		fmt.Println(" result is string", value)
+	case bool:
+		fmt.Println(" result is bool", value)
+	case int8:
+		fmt.Println(" result is int", value)
+	default:
+		fmt.Println(" result is not string/int", value)
+	}
+}
+func randomBool() interface{} {
+	return "sad"
+}
+func random() interface{} {
+	return "1"
 }
 
-func pembagian(a, b int) (int, error){
+func pembagian(a, b int) (int, error) {
 	if b == 0 {
 		return 0, errors.New("pembagian dengan 0")
 	}
@@ -161,44 +181,45 @@ func pembagian(a, b int) (int, error){
 
 type Customer struct {
 	Name, Address string
-	Age int
+	Age           int
 }
 type Seller struct {
 	Name, Address, StoreName string
-	Age int
+	Age                      int
 }
 
 func (customer Customer) sayHello() {
 	fmt.Println(" hallo", customer.Name)
 }
 
-type HasDetail interface { // can be used for another struct too ass
+type HasDetail interface {
+	// can be used for another struct too ass
 	GetName() string
 	GetAddress() string
 	GetAuthority() string
 }
 
-func (customer Customer) GetName() string{ // contract for Customer
+func (customer Customer) GetName() string { // contract for Customer
 	return customer.Name
 }
 
-func (customer Customer) GetAddress() string{ // contract for Customer
+func (customer Customer) GetAddress() string { // contract for Customer
 	return customer.Address
 }
 
-func (seller Seller) GetName() string{ // contract for Seller
+func (seller Seller) GetName() string { // contract for Seller
 	return seller.Name
 }
 
-func (seller Seller) GetAddress() string{ // contract for Seller
+func (seller Seller) GetAddress() string { // contract for Seller
 	return seller.Address
 }
 
-func (seller Seller) GetAuthority() string{
+func (seller Seller) GetAuthority() string {
 	return "Seller"
 }
 
-func (customer Customer) GetAuthority() string{
+func (customer Customer) GetAuthority() string {
 	return "Customer"
 }
 
