@@ -137,19 +137,17 @@ func main() {
 
 	fmt.Println("\nCOPYING SLICE AND REPLACE. it will affecting both array")
 	month2 := fullMonthCopy[1:]
-	fmt.Println(month2)
-
-	month2[1] = "alanDE`"            // affecting child and root
+	fmt.Println("month2", month2)
+	month2[1] = "alanDE`"            // affecting month2, fullMonthCopy, and month
 	month2 = append(month2, "maret") // but append only affecting the destination array
-	fmt.Println(month)
-	fmt.Println(fullMonthCopy)
-	fmt.Println(month2)
+	fmt.Println("month", month)
+	fmt.Println("fullMonthCopy", fullMonthCopy)
+	fmt.Println("month2", month2)
 
 	fmt.Println("\nCOPYING SLICE WITH COPY FUNCTION")
 	source := make([]string, 2, 2)
 	source[0] = "senin"
 	source[1] = "selasa"
-
 	destination := make([]string, len(source), cap(source))
 	copy(destination, source)
 	fmt.Println(destination)
@@ -161,14 +159,12 @@ func main() {
 
 	fmt.Println("\nCreate map")
 	maps := make(map[string]string)
-
 	maps["type"] = "LAPTOP"
 	maps["price"] = "30000"
 	maps["WILL BE DELETED SOON"] = "30000"
 	fmt.Println("maps type ", maps["type"])
 	delete(maps, "WILL BE DELETED SOON")
 	fmt.Println("maps len ", len(maps))
-
 	maps1 := map[string]string{
 		"name":    "LENOVO",
 		"factory": "hongkong",
