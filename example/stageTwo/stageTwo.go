@@ -133,6 +133,9 @@ func main() {
 	rubik := Customer{"rubik", "jalan", 34}
 	rubik.sayHello()
 
+	fmt.Println("\nINTERFACE. blue print")
+	gunawan := Customer{"gunawan", "jalan", 34}
+	SayYourIdentity(gunawan)
 }
 
 type Customer struct {
@@ -142,6 +145,24 @@ type Customer struct {
 
 func (customer Customer) sayHello() {
 	fmt.Println(" hallo", customer.Name)
+}
+
+type HasDetail interface {
+	GetName() string
+	GetAddress() string
+}
+
+func (customer Customer) GetName() string{ // contract for Customer
+	return customer.Name
+}
+
+func (customer Customer) GetAddress() string{ // contract for Customer
+	return customer.Address
+}
+
+func SayYourIdentity(detail HasDetail) {
+	fmt.Println(" hello my name is", detail.GetName())
+	fmt.Println(" I live in", detail.GetAddress())
 }
 
 func isPanic(error bool) {
