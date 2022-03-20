@@ -199,10 +199,12 @@ func main() {
 	fmt.Println("\nPOINTER 4. relocate root ke data yang baru")
 	bigSunShine := Customer{Name:"big sun shine"}
 	littleSunShine := &bigSunShine
+	mediumSunShine := &bigSunShine
 
 	*littleSunShine = Customer{Name: "little sun shine"} // DEREFERENCE: bigSunShine is no longer big sun shine, its little sun shine now
 	fmt.Println(bigSunShine)
 	fmt.Println(littleSunShine)
+	fmt.Println(mediumSunShine)
 
 
 }
