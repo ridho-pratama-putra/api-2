@@ -134,7 +134,7 @@ func main() {
 	fmt.Println("\nINTERFACE. blue print")
 	gunawan := Customer{"gunawan", "jalan", 34}
 	SayYourIdentity(gunawan)
-	yanto := Seller{Name: "yanto", StoreName: "pakaian bayi"}
+	yanto := Seller{Name: "yanto", Address: "appart"}
 	SayYourIdentity(yanto)
 
 	fmt.Println("\nNil untuk pengecekan null, hanya berlaku untuk interface, function, map ,slice, pointer dan channel")
@@ -164,6 +164,47 @@ func main() {
 	default:
 		fmt.Println(" result is not string/int", value)
 	}
+
+	fmt.Println("\nPOINTER 1. secara default, copy struct itu bukan copy reference (mungkin beda lagi dengan copy array)")
+	justinB := Customer{Name: "justin B", Address: "US"}
+	dustin := justinB
+	dustin.Name = "dustin" // wont impact source
+	dustin.Address = "IND"
+	fmt.Println(" Iam real justinB",justinB)
+	fmt.Println(" Iam copy of justinB",dustin)
+
+	fmt.Println("\nPOINTER 2. using * and & that will impact on its pointer and its root")
+	jeffB := Customer{Name:"jeffB"}
+	theRock := &jeffB
+	theRock.Age = 50 // will impact value of source and pointer itself
+	fmt.Println(" jeffB ", jeffB)
+	fmt.Println(" the rock", theRock)
+
+	fmt.Println("\nPOINTER 3. menumpuk value yang exist di pointer.")
+	var samsung Customer = Customer{Name:"samsung"}
+	var keirin *Customer = &samsung
+	keirin.Age = 50
+	fmt.Println(" before keirin", keirin)
+	fmt.Println(" before samsung", samsung)
+	// dibawah ini akan create data baru pointer diarahkan ke keirin, bukan samsung
+	keirin = &Customer{Name: "KEIRIN"}
+	// alamat pointer keirin tetep, data berubah. mengacunya sudah tidak lagi ke root.
+	fmt.Println(" after keirin", keirin)
+	fmt.Println(" samsung", samsung) // root nya tetap
+	// mengganti value keirin yang tadinya pointer tidak affect root nya
+	keirin.Name = "KIRIKANAN"
+	fmt.Println(" last keirin", keirin)
+	fmt.Println(" last samsung", samsung)
+
+	fmt.Println("\nPOINTER 4. relocate root ke data yang baru")
+	bigSunShine := Customer{Name:"big sun shine"}
+	littleSunShine := &bigSunShine
+
+	*littleSunShine = Customer{Name: "little sun shine"} // DEREFERENCE: bigSunShine is no longer big sun shine, its little sun shine now
+	fmt.Println(bigSunShine)
+	fmt.Println(littleSunShine)
+
+
 }
 func randomBool() interface{} {
 	return "sad"
