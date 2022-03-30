@@ -211,7 +211,25 @@ func main() {
 	huntersAnimal.Name = "Nestle" // affecting source and its copy
 	fmt.Println(" hunters moon", huntersMoon)
 	fmt.Println(" hunters animal", huntersAnimal)
+
+	fmt.Println("\nPOINTER di Function. untuk modify value of parameter yang di pass to function")
+	customer := Customer{"original name","", 12}
+	changeNameInCustomer(customer)
+	fmt.Println(" customer name ", customer.Name, " (not modified, even changeNameInCustomer applied)")
+	customerWillBeReplaced := &customer
+	changeNameInCustomerUsingPointer(customerWillBeReplaced)
+	fmt.Println(" customer name (in pointer)", customerWillBeReplaced.Name, " (modified)")
+	fmt.Println(" customer name (in source)", customer.Name, " (modified)")
 }
+
+func changeNameInCustomer(customer Customer) {
+	customer.Name = "name changed"
+}
+
+func changeNameInCustomerUsingPointer(customer *Customer) {
+	customer.Name = "name changed"
+}
+
 func randomBool() interface{} {
 	return "sad"
 }
