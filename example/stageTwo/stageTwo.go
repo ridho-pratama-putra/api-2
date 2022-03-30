@@ -200,13 +200,17 @@ func main() {
 	bigSunShine := Customer{Name:"big sun shine"}
 	littleSunShine := &bigSunShine
 	mediumSunShine := &bigSunShine
-
 	*littleSunShine = Customer{Name: "little sun shine"} // DEREFERENCE: bigSunShine is no longer big sun shine, its little sun shine now
 	fmt.Println(bigSunShine)
 	fmt.Println(littleSunShine)
 	fmt.Println(mediumSunShine)
 
-
+	fmt.Println("\nPOINTER 5. create pointer with New. pointer kosong tidak ada value")
+	var huntersMoon *Customer = new(Customer)
+	huntersAnimal := huntersMoon
+	huntersAnimal.Name = "Nestle" // affecting source and its copy
+	fmt.Println(" hunters moon", huntersMoon)
+	fmt.Println(" hunters animal", huntersAnimal)
 }
 func randomBool() interface{} {
 	return "sad"
