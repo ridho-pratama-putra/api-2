@@ -220,6 +220,16 @@ func main() {
 	changeNameInCustomerUsingPointer(customerWillBeReplaced)
 	fmt.Println(" customer name (in pointer)", customerWillBeReplaced.Name, " (modified)")
 	fmt.Println(" customer name (in source)", customer.Name, " (modified)")
+
+
+	fmt.Println("\nPOINTER di Method.")
+	customerPointerInMethod := Customer{"macbook", "",  21}
+	customer.ChangeNameByPointer()
+	fmt.Println(" customer name ", customerPointerInMethod)
+}
+
+func (customer *Customer) ChangeNameByPointer() {
+	customer.Name = "macbook pro"
 }
 
 func changeNameInCustomer(customer Customer) {
