@@ -3,8 +3,10 @@ package main
 import (
 	_ "api-2/example/stageThree/unusedUtils"
 	"api-2/example/stageThree/utils"
+	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -29,6 +31,21 @@ func main() {
 		fmt.Println("error", err)
 	}
 
+	fmt.Println("\nPACKAGE FLAG") // untuk parsing args command
+	host := flag.String("host", "localhost", "this is help for clue")
+	var port *int= flag.Int("port", 8080, "please input number")
+	// help clue will appear triggered with --help or error value supplied
+	flag.Parse()
+	fmt.Println(*host)
+	fmt.Println(*port)
 
-
+	fmt.Println("\nPACKAGE STRING")
+	fmt.Println(strings.ToTitle("stringto title"))
+	fmt.Println(strings.Trim(" trim P@ssw0rd ", " "))
+	fmt.Println(strings.ToLower("THIS ALL CAPItaL"))
+	fmt.Println(strings.ToUpper("THIS ALL small"))
+	var stringElement []string= strings.Split("this will split", " ")
+	fmt.Println("RESULT", stringElement[0], stringElement[1], stringElement[2])
+	fmt.Println("string is contain 1??", strings.Contains("who are you", "1"));
+	fmt.Println("string replace all", strings.ReplaceAll("who are you", " ", "*"));
 }
