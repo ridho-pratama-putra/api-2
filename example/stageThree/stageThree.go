@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -48,4 +49,26 @@ func main() {
 	fmt.Println("RESULT", stringElement[0], stringElement[1], stringElement[2])
 	fmt.Println("string is contain 1??", strings.Contains("who are you", "1"));
 	fmt.Println("string replace all", strings.ReplaceAll("who are you", " ", "*"));
+
+	fmt.Println("\nPACKAGE STRCONV")
+	seribu64, err := strconv.ParseInt("999999999999999999999", 10, 64)
+	seribu32, err := strconv.ParseInt("999999999999999999999", 10, 32)
+	seribu16, err := strconv.ParseInt("999999999999999999999", 10, 16)
+	seribu8, err := strconv.ParseInt("999999999999999999999", 10, 8)
+	fmt.Println(seribu64)
+	fmt.Println(seribu32)
+	fmt.Println(seribu16)
+	fmt.Println(seribu8)
+	ji, _:= strconv.ParseInt("-354634382", 10, 32)
+	fmt.Printf("this string %v has become pure %T \n", ji, ji)
+	k := strconv.FormatBool(false)
+	fmt.Println("this bool %s has become string ", k)
+	j, _:= strconv.ParseBool("trueee")
+	fmt.Printf("this string bool %t has become pure bool \n", j)
+	kf := strconv.FormatFloat(1.8, 'E', -1, 32)
+	fmt.Printf("this float %v has become string \n", kf)
+	jf, _:= strconv.ParseFloat("1.8", 32)
+	fmt.Printf("this string float %b has become pure float ", jf)
+
+
 }
