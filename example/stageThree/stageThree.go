@@ -5,6 +5,7 @@ import (
 	"api-2/example/stageThree/utils"
 	"flag"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -70,5 +71,13 @@ func main() {
 	jf, _:= strconv.ParseFloat("1.8", 32)
 	fmt.Printf("this string float %b has become pure float ", jf)
 
+	fmt.Println("\nPACKAGE MATH")
+	var floatValue float64 = 1.50;
+	var floatComparison float64 = 1.3
+	fmt.Printf("origin value %v will rounded as %v\n",floatValue,math.Round(floatValue))
+	fmt.Printf("origin value %v will floor as %v\n",floatValue,math.Floor(floatValue))
+	fmt.Printf("origin value %v will ceil as %v\n",floatValue,math.Ceil(floatValue))
+	fmt.Printf("between %v and %v, value %v is bigger\n",floatValue, floatComparison, math.Max(floatValue, floatComparison))
+	fmt.Printf("between %v and %v, value %v is smaller\n",floatValue, floatComparison, math.Min(floatValue, floatComparison))
 
 }
