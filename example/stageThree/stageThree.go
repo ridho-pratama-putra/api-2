@@ -4,6 +4,7 @@ import (
 	_ "api-2/example/stageThree/unusedUtils"
 	"api-2/example/stageThree/utils"
 	"container/list"
+	"container/ring"
 	"flag"
 	"fmt"
 	"math"
@@ -114,5 +115,21 @@ func main() {
 			fmt.Print(a.Value)
 		}
 	}
+
+	fmt.Println("\nPACKAGE CONTAINER/RING")
+	var dataRing *ring.Ring= ring.New(5)	// not dynamic like list
+	for i:= 0; i <= data.Len(); i ++ {
+		//fmt.Println(i)
+		dataRing.Value = "Value " + strconv.FormatInt(int64(i), 10)
+		dataRing = dataRing.Next()
+	}
+
+	//fmt.Println(*dataRing) // show memory location because kind of doesnt have println
+	// {0xc0000c2000 0xc0000c2060 <nil>}
+
+	dataRing.Do(func(value interface{}) {
+		fmt.Println(value)
+	})
+
 
 }
