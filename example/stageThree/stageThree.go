@@ -3,6 +3,7 @@ package main
 import (
 	_ "api-2/example/stageThree/unusedUtils"
 	"api-2/example/stageThree/utils"
+	"container/list"
 	"flag"
 	"fmt"
 	"math"
@@ -79,5 +80,39 @@ func main() {
 	fmt.Printf("origin value %v will ceil as %v\n",floatValue,math.Ceil(floatValue))
 	fmt.Printf("between %v and %v, value %v is bigger\n",floatValue, floatComparison, math.Max(floatValue, floatComparison))
 	fmt.Printf("between %v and %v, value %v is smaller\n",floatValue, floatComparison, math.Min(floatValue, floatComparison))
+
+	fmt.Println("\nPACKAGE CONTAINER/LIST")
+	data := list.New()
+	data.PushBack(3)
+	data.PushBack(4)
+	data.PushBack("lima")
+	fmt.Print(data.Front().Value)
+	fmt.Print(data.Back().Value)
+	fmt.Println(data.Front().Next().Value)
+	// forward
+	for a := data.Front(); a != nil; a = a.Next() {
+		if a.Next() == nil {
+			fmt.Println(a.Value)
+		} else {
+			fmt.Print(a.Value)
+		}
+	}
+	// backward
+	for a := data.Back(); a != nil; a = a.Prev() {
+		if a.Prev() == nil {
+			fmt.Println(a.Value)
+		} else {
+			fmt.Print(a.Value)
+		}
+	}
+	// try add some element
+	data.PushFront("enol")
+	for a := data.Front(); a != nil; a = a.Next() {
+		if a.Next() == nil {
+			fmt.Println(a.Value)
+		} else {
+			fmt.Print(a.Value)
+		}
+	}
 
 }
