@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -131,5 +132,32 @@ func main() {
 		fmt.Println(value)
 	})
 
+	fmt.Println("\nPACKAGE sort")
+	var users []User = []User {
+		{"A", 10},
+		{"B", 13},
+		{"C", 12},
+	}
 
+	sort.Sort(UserSlice(users))
+	fmt.Println(users)
+}
+
+type User struct {
+	Name string
+	Age int
+}
+
+type UserSlice []User
+
+func(value UserSlice) Len() int{
+	return len(value)
+}
+
+func(value UserSlice) Less(i,j int) bool{
+	return value[i].Age < value[j].Age
+}
+
+func(value UserSlice) Swap(i,j int) {
+	value[i], value[j] = value[j], value[i]
 }
