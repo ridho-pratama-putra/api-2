@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"reflect"
 	"sort"
 	"strconv"
 	"strings"
@@ -39,7 +40,7 @@ func main() {
 
 	fmt.Println("\nPACKAGE FLAG") // untuk parsing args command
 	host := flag.String("host", "localhost", "this is help for clue")
-	var port *int= flag.Int("port", 8080, "please input number")
+	var port *int = flag.Int("port", 8080, "please input number")
 	// help clue will appear triggered with --help or error value supplied
 	flag.Parse()
 	fmt.Println(*host)
@@ -50,11 +51,10 @@ func main() {
 	fmt.Println(strings.Trim(" trim P@ssw0rd ", " "))
 	fmt.Println(strings.ToLower("THIS ALL CAPItaL"))
 	fmt.Println(strings.ToUpper("THIS ALL small"))
-	var stringElement []string= strings.Split("this will split", " ")
+	var stringElement []string = strings.Split("this will split", " ")
 	fmt.Println("RESULT", stringElement[0], stringElement[1], stringElement[2])
 	fmt.Println("string is contain 1??", strings.Contains("who are you", "1"));
 	fmt.Println("string replace all", strings.ReplaceAll("who are you", " ", "*"));
-
 	fmt.Println("\nPACKAGE STRCONV")
 	seribu64, err := strconv.ParseInt("999999999999999999999", 10, 64)
 	seribu32, err := strconv.ParseInt("999999999999999999999", 10, 32)
@@ -64,25 +64,25 @@ func main() {
 	fmt.Println(seribu32)
 	fmt.Println(seribu16)
 	fmt.Println(seribu8)
-	ji, _:= strconv.ParseInt("-354634382", 10, 32)
+	ji, _ := strconv.ParseInt("-354634382", 10, 32)
 	fmt.Printf("this string %v has become pure %T \n", ji, ji)
 	k := strconv.FormatBool(false)
 	fmt.Println("this bool %s has become string ", k)
-	j, _:= strconv.ParseBool("trueee")
+	j, _ := strconv.ParseBool("trueee")
 	fmt.Printf("this string bool %t has become pure bool \n", j)
 	kf := strconv.FormatFloat(1.8, 'E', -1, 32)
 	fmt.Printf("this float %v has become string \n", kf)
-	jf, _:= strconv.ParseFloat("1.8", 32)
+	jf, _ := strconv.ParseFloat("1.8", 32)
 	fmt.Printf("this string float %b has become pure float ", jf)
 
 	fmt.Println("\nPACKAGE MATH")
 	var floatValue float64 = 1.50;
 	var floatComparison float64 = 1.3
-	fmt.Printf("origin value %v will rounded as %v\n",floatValue,math.Round(floatValue))
-	fmt.Printf("origin value %v will floor as %v\n",floatValue,math.Floor(floatValue))
-	fmt.Printf("origin value %v will ceil as %v\n",floatValue,math.Ceil(floatValue))
-	fmt.Printf("between %v and %v, value %v is bigger\n",floatValue, floatComparison, math.Max(floatValue, floatComparison))
-	fmt.Printf("between %v and %v, value %v is smaller\n",floatValue, floatComparison, math.Min(floatValue, floatComparison))
+	fmt.Printf("origin value %v will rounded as %v\n", floatValue, math.Round(floatValue))
+	fmt.Printf("origin value %v will floor as %v\n", floatValue, math.Floor(floatValue))
+	fmt.Printf("origin value %v will ceil as %v\n", floatValue, math.Ceil(floatValue))
+	fmt.Printf("between %v and %v, value %v is bigger\n", floatValue, floatComparison, math.Max(floatValue, floatComparison))
+	fmt.Printf("between %v and %v, value %v is smaller\n", floatValue, floatComparison, math.Min(floatValue, floatComparison))
 
 	fmt.Println("\nPACKAGE CONTAINER/LIST")
 	data := list.New()
@@ -119,8 +119,8 @@ func main() {
 	}
 
 	fmt.Println("\nPACKAGE CONTAINER/RING")
-	var dataRing *ring.Ring= ring.New(5)	// not dynamic like list
-	for i:= 0; i <= data.Len(); i ++ {
+	var dataRing *ring.Ring = ring.New(5) // not dynamic like list
+	for i := 0; i <= data.Len(); i++ {
 		//fmt.Println(i)
 		dataRing.Value = "Value " + strconv.FormatInt(int64(i), 10)
 		dataRing = dataRing.Next()
@@ -134,10 +134,10 @@ func main() {
 	})
 
 	fmt.Println("\nPACKAGE sort")
-	var users []User = []User {
-		{"A", 10},
-		{"B", 13},
-		{"C", 12},
+	var users []User = []User{
+		{Name: "A", Age: 10},
+		{Name: "B", Age: 13},
+		{Name: "C", Age: 12},
 	}
 
 	sort.Sort(UserSlice(users))
@@ -162,7 +162,7 @@ func main() {
 	fmt.Println("full", time.Now().In(location))
 	fmt.Println("years", time.Now().Year())
 	fmt.Println("month", time.Now().Month())
-	fmt.Println("day", time.Now().Day()) // tanggal
+	fmt.Println("day", time.Now().Day())     // tanggal
 	fmt.Println("day", time.Now().Weekday()) // hari
 	fmt.Println("hour", time.Now().Hour())
 	fmt.Println("minute", time.Now().Minute())
@@ -174,23 +174,57 @@ func main() {
 	rfc339DateFormat := "2006-01-02"
 	parsedTimeCustom, _ := time.Parse(rfc339DateFormat, "2020-05-30")
 	fmt.Println("parse date UTC using custom format", parsedTimeCustom)
+
+	fmt.Println("\nPACKAGE reflect")
+	womenUser := User{Name: "balqis", Age: 27, Address: "ordow"}
+	noAddressUser := User{Name: "balqis", Age: 27}
+	userType := reflect.TypeOf(womenUser)
+	nameField := userType.Field(0)
+	ageField := userType.Field(1)
+	requiredNameField := nameField.Tag.Get("required")
+	requiredAddress := userType.Field(2).Tag.Get("required")
+	maxAddress := userType.Field(2).Tag.Get("max")
+	fmt.Println("womenUser :: ", womenUser)
+	fmt.Println("userType :: ", userType)
+	fmt.Println("nameField :: ", nameField)
+	fmt.Println("ageField :: ", ageField)
+	fmt.Println("requiredName :: ", requiredNameField)                                           // return empty
+	fmt.Println("requiredAddress :: ", reflect.TypeOf(requiredAddress), " :: ", requiredAddress) // return true
+	fmt.Println("maxAddress :: ", reflect.TypeOf(maxAddress), " :: ", maxAddress)                // return true
+	fmt.Println("type of Valueof:: ", reflect.TypeOf(reflect.ValueOf(maxAddress)))
+	intConvertedMaxAddress, _ := strconv.ParseInt(maxAddress, 10, 8)
+	fmt.Println("maxAddressVal :: ", intConvertedMaxAddress > 90)
+	fmt.Println("isValid struct :: ", isvalid(womenUser))
+	fmt.Println("isValid struct :: ", isvalid(noAddressUser))
+}
+
+func isvalid(data interface{}) bool {
+	t := reflect.TypeOf(data)
+	for i :=0; i<t.NumField(); i++ {
+		field := t.Field(i)
+		if field.Tag.Get("required") == "true" {
+			return reflect.ValueOf(data).Field(i).Interface() != ""
+		}
+	}
+	return true
 }
 
 type User struct {
-	Name string
-	Age int
+	Name    string
+	Age     int
+	Address string `required:"true" max:"10"`
 }
 
 type UserSlice []User
 
-func(value UserSlice) Len() int{
+func (value UserSlice) Len() int {
 	return len(value)
 }
 
-func(value UserSlice) Less(i,j int) bool{
+func (value UserSlice) Less(i, j int) bool {
 	return value[i].Age < value[j].Age
 }
 
-func(value UserSlice) Swap(i,j int) {
+func (value UserSlice) Swap(i, j int) {
 	value[i], value[j] = value[j], value[i]
 }
