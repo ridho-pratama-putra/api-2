@@ -10,6 +10,7 @@ import (
 	"math"
 	"os"
 	"reflect"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -196,6 +197,13 @@ func main() {
 	fmt.Println("maxAddressVal :: ", intConvertedMaxAddress > 90)
 	fmt.Println("isValid struct :: ", isvalid(womenUser))
 	fmt.Println("isValid struct :: ", isvalid(noAddressUser))
+
+	fmt.Println("\nPACKAGE regex")
+	var regexpRule *regexp.Regexp = regexp.MustCompile("e[a-zA-Z]o")
+	fmt.Println("applied rule for :: ", "eJo", " :: ", regexpRule.MatchString("eJo"))
+	fmt.Println("applied rule for :: ", "e3o", " :: ", regexpRule.MatchString("e3o"))
+
+
 }
 
 func isvalid(data interface{}) bool {
