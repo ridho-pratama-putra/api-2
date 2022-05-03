@@ -68,7 +68,7 @@ func main() {
 	ji, _ := strconv.ParseInt("-354634382", 10, 32)
 	fmt.Printf("this string %v has become pure %T \n", ji, ji)
 	k := strconv.FormatBool(false)
-	fmt.Println("this bool %s has become string ", k)
+	fmt.Printf("this bool %s has become string ", k)
 	j, _ := strconv.ParseBool("trueee")
 	fmt.Printf("this string bool %t has become pure bool \n", j)
 	kf := strconv.FormatFloat(1.8, 'E', -1, 32)
@@ -195,8 +195,8 @@ func main() {
 	fmt.Println("type of Valueof:: ", reflect.TypeOf(reflect.ValueOf(maxAddress)))
 	intConvertedMaxAddress, _ := strconv.ParseInt(maxAddress, 10, 8)
 	fmt.Println("maxAddressVal :: ", intConvertedMaxAddress > 90)
-	fmt.Println("isValid struct :: ", isvalid(womenUser))
-	fmt.Println("isValid struct :: ", isvalid(noAddressUser))
+	fmt.Println("isValid struct :: ", IsValid(womenUser))
+	fmt.Println("isValid struct :: ", IsValid(noAddressUser))
 
 	fmt.Println("\nPACKAGE regex")
 	var regexpRule *regexp.Regexp = regexp.MustCompile("e[a-zA-Z]o")
@@ -206,7 +206,7 @@ func main() {
 
 }
 
-func isvalid(data interface{}) bool {
+func IsValid(data interface{}) bool {
 	t := reflect.TypeOf(data)
 	for i :=0; i<t.NumField(); i++ {
 		field := t.Field(i)
