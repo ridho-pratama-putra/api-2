@@ -10,6 +10,6 @@ func init() {
 	fmt.Println("initializing two dimension")
 }
 
-func AreOfCircleWithRadius(radius float64) float64{
+func AreaOfCircleWithRadius(radius float64) float64{
 	return PI * radius * radius
 }

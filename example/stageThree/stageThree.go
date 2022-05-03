@@ -20,7 +20,7 @@ import (
 func main() {
 	fmt.Println("\nPACKAGE & IMPORTS")
 	fmt.Println("stage three", utils.AlayString("Ini nih "))
-	fmt.Println("stage three", utils.AreOfCircleWithRadius(5.1))
+	fmt.Println("utils to calculate AreaOfCircleWithRadius", utils.AreaOfCircleWithRadius(5.1))
 
 	fmt.Println("\nACCESS MODIFIER")
 	fmt.Println("accessing value defined in twoDimension", utils.PI)
